@@ -2,6 +2,9 @@
 
 **AL Project Configurator** is a Visual Studio Code extension that synchronizes default settings in AL projects from a Git repository. The extension downloads the configured repository and updates the current project's files, overwriting existing keys in `.json` files with those from the source repository.
 
+**Usage video(ESP):** <br> 
+https://youtu.be/1dmaDrGQtFY<br>
+
 ## Features
 
 - Downloads and clones a configured Git repository.
