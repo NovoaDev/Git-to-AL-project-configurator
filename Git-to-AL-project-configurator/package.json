@@ -1,0 +1,57 @@
+{
+  "name": "al-project-configurator",
+  "displayName": "AL Project Configurator",
+  "description": "A VS Code extension to synchronize default settings in AL projects from Git",
+  "version": "1.0.0",
+  "publisher": "antonionovoa0104",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NovoaDev/Git-to-AL-project-configurator"
+  },
+  "engines": {
+    "vscode": "^1.57.0"
+  },
+  "main": "./src/extension.js",
+  "scripts": {
+    "compile": "node ./src/extension.js"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.syncRepo",
+        "title": "AL Project Configurator: Load configuration from template"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "AL Project Configurator",
+      "properties": {
+        "AlProjectConfigurator.PTETemplate": {
+          "type": "string",
+          "default": "",
+          "description": "Remote SCM url to clone repository."
+        },
+        "AlProjectConfigurator.ProductTemplate": {
+          "type": "string",
+          "default": "",
+          "description": "Remote SCM url to clone repository."
+        }
+      }
+    }
+  },
+  "author": {
+    "name": "Antonio Novoa",
+    "url": "https://github.com/NovoaDev/",
+    "email": "anovoa@novoadev.com"
+  },
+  "categories": [
+    "Formatters",
+    "Other"
+  ],
+  "license": "MIT",
+  "icon": "./res/logo.png",
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "simple-git": "^3.24.0"
+  }
+}
