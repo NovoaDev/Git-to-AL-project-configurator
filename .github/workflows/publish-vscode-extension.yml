@@ -20,18 +20,18 @@ jobs:
       with:
         node-version: '20'
     - name: Install dependencies
-      run: npm install ${{ github.workspace }}/Git-to-AL-project-configurator/
+      run: npm install ${{github.workspace}}/Git-to-AL-project-configurator/
     - name: Install vsce globally
       run: npm install -g vsce
     - name: package vsc Install
       run: |
-        cd ${{ github.workspace }}/
-        vsce package --out ${{ github.workspace }}/Git-to-AL-project-configurator.vsix
+        cd ${{ github.workspace }}/Git-to-AL-project-configurator/
+        vsce package --out ${{github.workspace}}/GittoALprojectconfig.vsix
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
           name: Git-to-AL-project-configurator.vsix
-          path: ${{ github.workspace }}/Git-to-AL-project-configurator.vsix
+          path: ${{ github.workspace }}/GittoALprojectconfig.vsix
           if-no-files-found: error
     - name: Upload Repository
       uses: stefanzweifel/git-auto-commit-action@v5
