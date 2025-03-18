@@ -25,7 +25,7 @@ jobs:
       run: npm install -g vsce
     - name: package vsc Install
       run: |
-        cd ${{ github.workspace }}/Git-to-AL-project-configurator/
+        cd ${{ github.workspace }}/
         vsce package --out ${{ github.workspace }}/Git-to-AL-project-configurator.vsix
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
