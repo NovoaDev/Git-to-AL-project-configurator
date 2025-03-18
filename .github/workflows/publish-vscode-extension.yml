@@ -28,7 +28,7 @@ jobs:
         cd ${{ github.workspace }}/Git-to-AL-project-configurator/
         vsce package --out ${{ github.workspace }}/Git-to-AL-project-configurator.vsix
     - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
           name: Git-to-AL-project-configurator.vsix
           path: ${{ github.workspace }}/Git-to-AL-project-configurator.vsix
