@@ -15,11 +15,6 @@
   "scripts": {
     "compile": "node ./src/extension.js"
   },
-    "activationEvents": [
-    "onCommand:extension.syncRepo",
-    "onLanguage:al",
-    "onStartupFinished"
-  ],
   "contributes": {
     "commands": [
       {
