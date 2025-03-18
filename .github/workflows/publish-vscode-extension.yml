@@ -1,47 +1,39 @@
-name: Build and Publish VSCode Extension
+name: 'VSCE package'
+run-name: "VSCE package"
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  CreateApp:
+    runs-on: [ ubuntu-latest ]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Bump version
-        run: |
-          git config --global user.email "antonio.novoa@outlook.es"
-          git config --global user.name "anovoa"
-          npm version patch -m "Bump version to %s [skip ci]"
-          git push --follow-tags
-        env:
-          GITHUB_TOKEN: ${{secrets.GHTOKENWORKFLOW}}
-
-      - name: Lint code
-        run: npm run lint
-
-      - name: Compile code
-        run: npm run compile
-
-      - name: Install vsce
-        run: npm install -g @vscode/vsce
-
-      - name: Package extension
-        run: vsce package
-
-      - name: Upload VSIX artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: vscode-extension.vsix
-          path: '*.vsix'
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+    - name: Install dependencies
+      run: npm install ${{ github.workspace }}/Git-to-AL-project-configurator/
+    - name: Install vsce globally
+      run: npm install -g vsce
+    - name: package vsc Install
+      run: |
+        cd ${{ github.workspace }}/Git-to-AL-project-configurator/
+        vsce package --out ${{ github.workspace }}/Git-to-AL-project-configurator.vsix
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+          name: Git-to-AL-project-configurator.vsix
+          path: ${{ github.workspace }}/Git-to-AL-project-configurator.vsix
+          if-no-files-found: error
+    - name: Upload Repository
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: Update repository with new version of vsix
