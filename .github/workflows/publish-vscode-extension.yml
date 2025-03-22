@@ -9,36 +9,31 @@ permissions:
 
 jobs:
   CreateApp:
-    runs-on: ubuntu-latest
+    runs-on: [ ubuntu-latest ]
     steps:
     - name: Checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v2
       with:
         node-version: '20'
-
     - name: Install dependencies
-      run: npm install
-
+      run: npm install ${{ github.workspace }}/Git-to-AL-project-configurator/
     - name: Install vsce globally
       run: npm install -g vsce
-
-    - name: Package VSCE
-      run: vsce package --out GittoALprojectconfig.vsix
-
+    - name: package vsc Install
+      run: |
+        cd ${{ github.workspace }}/Git-to-AL-project-configurator/
+        vsce package --out ${{ github.workspace }}/GitToALProjectCfg.vsix
     - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
-        name: GittoALprojectconfig.vsix
-        path: GittoALprojectconfig.vsix
-        if-no-files-found: error
-
+          name: name.vsix
+          path: ${{ github.workspace }}/GitToALProjectCfg.vsix
+          if-no-files-found: error
     - name: Upload Repository
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
-        commit_message: "Update repository with new version of vsix"
-        file_pattern: '*.vsix'
+        commit_message: Update repository with new version of vsix
