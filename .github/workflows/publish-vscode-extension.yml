@@ -28,9 +28,9 @@ jobs:
         cd ${{ github.workspace }}/Git-to-AL-project-configurator/
         vsce package --out ${{ github.workspace }}/GitToALProjectCfg.vsix
     - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-          name: name.vsix
+          name: GitToALProjectCfg.vsix
           path: ${{ github.workspace }}/GitToALProjectCfg.vsix
           if-no-files-found: error
     - name: Upload Repository
