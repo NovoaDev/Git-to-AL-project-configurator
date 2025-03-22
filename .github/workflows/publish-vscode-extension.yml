@@ -22,27 +22,23 @@ jobs:
         node-version: '20'
 
     - name: Install dependencies
-      run: |
-        cd ${{ github.workspace }}/Git-to-AL-project-configurator
-        npm install
+      run: npm install
 
     - name: Install vsce globally
       run: npm install -g vsce
 
     - name: Package VSCE
-      run: |
-        cd ${{ github.workspace }}/Git-to-AL-project-configurator
-        vsce package --out ${{ github.workspace }}/GittoALprojectconfig.vsix
+      run: vsce package --out GittoALprojectconfig.vsix
 
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: GittoALprojectconfig.vsix
-        path: ${{ github.workspace }}/GittoALprojectconfig.vsix
+        path: GittoALprojectconfig.vsix
         if-no-files-found: error
 
     - name: Upload Repository
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
         commit_message: "Update repository with new version of vsix"
-        file_pattern: 'GittoALprojectconfig.vsix'
+        file_pattern: '*.vsix'
